@@ -1,0 +1,7 @@
+C:\Users\Asus\Desktop\C#2\HW\Homework\Homework\bin\Debug\Homework.exe.config
+C:\Users\Asus\Desktop\C#2\HW\Homework\Homework\bin\Debug\Homework.exe
+C:\Users\Asus\Desktop\C#2\HW\Homework\Homework\bin\Debug\Homework.pdb
+C:\Users\Asus\Desktop\C#2\HW\Homework\Homework\obj\Debug\Homework.csprojAssemblyReference.cache
+C:\Users\Asus\Desktop\C#2\HW\Homework\Homework\obj\Debug\Homework.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Desktop\C#2\HW\Homework\Homework\obj\Debug\Homework.exe
+C:\Users\Asus\Desktop\C#2\HW\Homework\Homework\obj\Debug\Homework.pdb
