@@ -48,9 +48,11 @@ namespace Homework
             Pos.X = Pos.X - Dir.X;
             if (Pos.X < 0) Pos.X = Game.Width + Size.Width;
             Pos.Y = Pos.Y - Dir.Y;
-            if (Pos.Y < 0) Pos.X = Game.Height + Size.Height;
+            if (Pos.Y < 0) Pos.Y = Game.Height + Size.Height;
 
+            if (Pos.X > Game.Width) { Pos.X = 0; Pos.X += Size.Width; };
 
+            //if (Pos.Y > Game.Height) { Pos.Y = 0; Pos.Y += Size.Height; };
         }
 
 

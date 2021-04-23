@@ -16,11 +16,18 @@ namespace Homework
         private static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
 
+        private static Bullet _bullet;
+        private static Asteroid []_asteroids;
+
+
+        private static int width;
+        private static int height;
+
         //Свойства
         // Ширина и высота игрового поля
 
-        public static int Width { get; set; }
-        public static int Height { get; set; }
+        public static int Width { get { return width; } set { if (value > 3000 || value < 0) { throw new ArgumentOutOfRangeException();return; } else { width = value; } } }
+        public static int Height { get { return height; } set { if (value > 3000 || value < 0) { throw new ArgumentOutOfRangeException(); return; } else { height = value; } } }
 
         static Game()
         {
@@ -49,6 +56,7 @@ namespace Homework
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
 
             Timer timer = new Timer { Interval = 100 };
+            if (timer.Interval > 100) throw new GameObjectException1("Too high speed", timer.Interval);
             timer.Start();
             timer.Tick += Timer_Tick;
 
@@ -65,13 +73,19 @@ namespace Homework
             //Проверка вывода графики
 
             Buffer.Graphics.Clear(Color.Black);
-            Buffer.Graphics.DrawRectangle(Pens.White, new Rectangle(100, 100, 200, 200));
-            Buffer.Graphics.FillEllipse(Brushes.White, new RectangleF(100, 100, 200, 200));
             Buffer.Render();
 
             Buffer.Graphics.Clear(Color.Black);
             foreach (BaseObject obj in _objs)
                 obj.Draw();
+
+            foreach (Asteroid obj in _asteroids)
+            {
+                obj.Draw();
+
+            }
+            _bullet.Draw();
+
             Buffer.Render();
         }
 
@@ -79,16 +93,38 @@ namespace Homework
         {
             foreach (BaseObject obj in _objs)
                 obj.Update();
+
+
+
+
+            foreach (Asteroid obj in _asteroids)
+            {
+                obj.Update();
+                if (obj.Collision(_bullet)) { System.Media.SystemSounds.Hand.Play(); _bullet.Regen(obj, Width, Height); }
+
+            }
+
+            _bullet.Update();
+
         }
 
 
         public static void Load()
         {
             _objs = new BaseObject[30];
-            for (int i = 0; i < _objs.Length / 2; i++)
-                _objs[i] = new BaseObject(new Point(600, i * 20), new Point(-i, -i), new Size(10, 10));
-            for (int i = _objs.Length / 2; i < _objs.Length; i++)
-                _objs[i] = new Star(new Point(1000, i * 15), new Point(i, 0), new Size(5, 10));
+            _bullet = new Bullet(new Point(0, 200), new Point(5, 0), new Size(4, 1));
+            _asteroids = new Asteroid[3];
+            var rnd = new Random();
+            for (var i = 0; i < _objs.Length; i++)
+            {
+                int r = rnd.Next(5, 50);
+                _objs[i] = new Star(new Point(1000, rnd.Next(0, Game.Height)), new Point(-r, r), new Size(3, 3));
+            }
+            for (var i = 0; i < _asteroids.Length; i++)
+            {
+                int r = rnd.Next(5, 50);
+                _asteroids[i] = new Asteroid(new Point(1000, rnd.Next(0, Game.Height)), new Point(-r / 5, r), new Size(r, r));
+            }
 
         }
 
