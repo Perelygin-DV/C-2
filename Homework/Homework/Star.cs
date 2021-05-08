@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Collections;
 
 namespace Homework
 {
-    class Star : BaseObject
+    class Star : BaseObject, IComparer , ISet
     {
         static Random rnd = new Random();
         //static BaseObject[] _objs;
@@ -45,17 +46,15 @@ namespace Homework
 
         public override void Update()
         {
-            Pos.X = Pos.X - Dir.X;
-            if (Pos.X < 0) Pos.X = Game.Width + Size.Width;
-            Pos.Y = Pos.Y - Dir.Y;
-            if (Pos.Y < 0) Pos.Y = Game.Height + Size.Height;
-
-            if (Pos.X > Game.Width) { Pos.X = 0; Pos.X += Size.Width; };
+            Pos.X = Pos.X + Dir.X;
+            if (Pos.X < 0) Pos.X = Game.Width ;
 
             //if (Pos.Y > Game.Height) { Pos.Y = 0; Pos.Y += Size.Height; };
         }
 
-
-
+        public int Compare(object x, object y)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

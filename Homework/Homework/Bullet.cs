@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace Homework
 {
-    class Bullet :BaseObject
+    class Bullet :BaseObject 
     {
-
+        private bool dispose = false;
+        public bool Dispose { get { return dispose; } set { dispose = value; } }
         public Bullet (Point pos, Point dir, Size size): base(pos, dir, size)
         {
             
         }
 
-
+   
 
         public override void Draw()
         {
@@ -29,7 +30,9 @@ namespace Homework
 
         public override void Update()
         {
-            Pos.X = Pos.X + 3;
+            Pos.X = Pos.X + 15;
+            if (Pos.X > Game.Width) dispose=true;
+
         }
     }
 }

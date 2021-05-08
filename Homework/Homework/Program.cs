@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 
@@ -23,6 +24,25 @@ namespace Homework
             Game.Draw();
            
             Application.Run(form);
+
+
+            SortedSet<int> a = new SortedSet<int>();
+            a.Add(1);
+            a.Add(1);
+            List<int> b = new List<int>();
+
+
+            var dict = new Dictionary<char, string>();
+            dict['a'] = "jk";
+            dict['b'] = "mm";
+            dict['c'] = "rr";
+            foreach(KeyValuePair<char,string> ob in dict)
+            {
+                Console.WriteLine(ob.Key);
+            }
+
+
+
 
         }
     }
